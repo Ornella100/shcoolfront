@@ -1,12 +1,11 @@
 import axios from 'axios'
 
-// En développement, passer par le proxy Vite pour garder les cookies de session
-// sur la même origine que le frontend. En déploiement, définir VITE_API_URL.
-// En développement, viser explicitement le serveur Django en HTTP. Le proxy
-// Vite peut masquer une redirection HTTPS locale et produire ERR_SSL_PROTOCOL_ERROR.
+// En production, les appels /api passent par une réécriture Vercel vers Render.
+// Le navigateur reste ainsi sur l'origine du frontend et conserve la session.
+// En local, joindre Django directement en HTTP.
 const API_BASE_URL = import.meta.env.DEV
   ? 'http://localhost:8000'
-  : (import.meta.env.VITE_API_URL?.replace(/\/$/, '') || '')
+  : ''
 
 function getCookie(name) {
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
