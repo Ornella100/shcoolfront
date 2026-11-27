@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -22,7 +23,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
-import { getApiErrorMessage } from '@/lib/api'
+import { api, getApiErrorMessage } from '@/lib/api'
 import { updateProfile } from '@/lib/accounts-api'
 import { useAuth } from '@/lib/auth'
 import { disablePush, enablePush, getPushConfig } from '@/lib/push-api'
@@ -57,6 +58,26 @@ export default function ProfilePage() {
       toast.success(pushQuery.data?.subscribed ? 'Notifications désactivées' : 'Notifications activées sur cet appareil')
     },
     onError: (error) => toast.error(error.message || 'Impossible de configurer les notifications'),
+  })
+  const whatsappQuery = useQuery({
+    queryKey: ['school-whatsapp'],
+    queryFn: async () => (await api.get('/school/whatsapp/')).data,
+  })
+  const [whatsappPhoneId, setWhatsappPhoneId] = useState('')
+  const [whatsappToken, setWhatsappToken] = useState('')
+  useEffect(() => {
+    if (whatsappQuery.data) setWhatsappPhoneId(whatsappQuery.data.phone_number_id || '')
+  }, [whatsappQuery.data])
+  const whatsappMutation = useMutation({
+    mutationFn: async () => {
+      return (await api.put('/school/whatsapp/', { phone_number_id: whatsappPhoneId, access_token: whatsappToken })).data
+    },
+    onSuccess: () => {
+      setWhatsappToken('')
+      queryClient.invalidateQueries({ queryKey: ['school-whatsapp'] })
+      toast.success('WhatsApp configuré pour votre école')
+    },
+    onError: (error) => toast.error(getApiErrorMessage(error, 'Configuration WhatsApp impossible')),
   })
 
   const identityForm = useForm({
@@ -114,6 +135,29 @@ export default function ProfilePage() {
           )}
         </CardContent>
       </Card>
+
+      {user?.account_type === 'STAFF' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>WhatsApp de l’école</CardTitle>
+            <CardDescription>Chaque école connecte son propre compte WhatsApp Business. Le jeton est chiffré sur le serveur et n’est jamais réaffiché.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {whatsappQuery.data?.connected && <p className="text-sm text-emerald-700">Compte connecté · ID : {whatsappQuery.data.phone_number_id}</p>}
+            <div className="space-y-2">
+              <FormLabel htmlFor="whatsapp-phone-id">Phone Number ID Meta</FormLabel>
+              <Input id="whatsapp-phone-id" value={whatsappPhoneId} onChange={(event) => setWhatsappPhoneId(event.target.value)} placeholder="Identifiant du numéro dans Meta" />
+            </div>
+            <div className="space-y-2">
+              <FormLabel htmlFor="whatsapp-token">Jeton d’accès Meta {whatsappQuery.data?.has_token ? '(laisser vide pour conserver le jeton actuel)' : ''}</FormLabel>
+              <Input id="whatsapp-token" type="password" autoComplete="new-password" value={whatsappToken} onChange={(event) => setWhatsappToken(event.target.value)} placeholder="Coller le jeton d’accès de cette école" />
+            </div>
+            <Button onClick={() => whatsappMutation.mutate()} disabled={whatsappMutation.isPending || !whatsappPhoneId.trim() || (!whatsappToken.trim() && !whatsappQuery.data?.has_token)}>
+              {whatsappMutation.isPending ? 'Enregistrement…' : 'Enregistrer WhatsApp'}
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>
