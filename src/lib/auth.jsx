@@ -48,9 +48,12 @@ export function AuthProvider({ children }) {
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
+      await ensureCsrfCookie()
       await api.post('/logout/')
     },
-    onSuccess: () => {
+    onSettled: () => {
+      // Même si le serveur refuse la requête ou est momentanément indisponible,
+      // on efface les données de l'ancien compte sur cet appareil.
       queryClient.clear()
       queryClient.setQueryData(['me'], null)
     },

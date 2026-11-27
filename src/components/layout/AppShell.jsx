@@ -64,8 +64,13 @@ export default function AppShell() {
 
   async function handleLogout() {
     setMobileMenuOpen(false)
-    await logout()
-    navigate('/connexion', { replace: true })
+    try {
+      await logout()
+    } catch {
+      // onSettled efface la session locale même si l'appel serveur échoue.
+    } finally {
+      navigate('/connexion', { replace: true })
+    }
   }
 
   const renderSidebar = (onNavigate) => (
