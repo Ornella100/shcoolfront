@@ -23,7 +23,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
 import { api, getApiErrorMessage } from '@/lib/api'
 import { updateProfile } from '@/lib/accounts-api'
 import { useAuth } from '@/lib/auth'
@@ -115,9 +114,10 @@ export default function ProfilePage() {
   })
 
   return (
-    <div className="max-w-lg space-y-6">
+    <div className="max-w-6xl space-y-6">
       <h1 className="text-2xl font-semibold">Mon profil</h1>
 
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
       <Card>
         <CardHeader>
           <CardTitle>Notifications sur cet appareil</CardTitle>
@@ -218,8 +218,6 @@ export default function ProfilePage() {
         </CardContent>
       </Card>
 
-      <Separator />
-
       <Card>
         <CardHeader>
           <CardTitle>Changer de mot de passe</CardTitle>
@@ -276,6 +274,7 @@ export default function ProfilePage() {
           </Form>
         </CardContent>
       </Card>
+      </div>
     </div>
   )
 }
