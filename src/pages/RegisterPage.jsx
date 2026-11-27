@@ -52,13 +52,13 @@ export default function RegisterPage() {
   })
 
   if (!isLoading && user) {
-    return <Navigate to="/" replace />
+    return <Navigate to={user.account_type === 'PARENT' ? '/portail-parent' : '/tableau-de-bord'} replace />
   }
 
   async function onSubmit(values) {
     try {
       await register(values)
-      navigate('/', { replace: true })
+      navigate('/tableau-de-bord', { replace: true })
     } catch (err) {
       const data = err?.response?.data
       if (data && typeof data === 'object') {

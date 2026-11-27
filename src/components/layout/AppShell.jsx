@@ -29,7 +29,7 @@ import { useAuth } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 
 const navItems = [
-  { to: '/', label: 'Tableau de bord', icon: LayoutDashboard, end: true },
+  { to: '/tableau-de-bord', label: 'Tableau de bord', icon: LayoutDashboard, end: true },
   { to: '/eleves-classes', label: 'Élèves & classes', icon: GraduationCap },
   { to: '/enseignants', label: 'Enseignants', icon: UserRound },
   { to: '/annees', label: 'Années scolaires', icon: CalendarDays },

@@ -12,6 +12,7 @@ import StudentsPage from '@/pages/eleves-classes/StudentsPage'
 import ForgotPasswordPage from '@/pages/ForgotPasswordPage'
 import ImportPage from '@/pages/ImportPage'
 import LoginPage from '@/pages/LoginPage'
+import LandingPage from '@/pages/LandingPage'
 import MessageDetailPage from '@/pages/MessageDetailPage'
 import MessagesPage from '@/pages/MessagesPage'
 import ParentsPage from '@/pages/ParentsPage'
@@ -32,6 +33,7 @@ import TenantRoute from '@/components/TenantRoute'
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<LandingPage />} />
       <Route path="/connexion" element={<LoginPage />} />
       <Route path="/inscription" element={<RegisterPage />} />
       <Route path="/mot-de-passe-oublie" element={<ForgotPasswordPage />} />
@@ -39,7 +41,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<AppShell />}>
           <Route element={<TenantRoute />}>
-            <Route index element={<DashboardPage />} />
+            <Route path="tableau-de-bord" element={<DashboardPage />} />
             <Route path="eleves-classes" element={<StudentsPage />} />
             <Route path="annees" element={<AnneesPage />} />
             <Route path="presences" element={<AttendancePage />} />

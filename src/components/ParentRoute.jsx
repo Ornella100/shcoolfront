@@ -13,6 +13,6 @@ export default function ParentRoute() {
     )
   }
 
-  if (user?.account_type !== 'PARENT') return <Navigate to="/" replace />
+  if (user?.account_type !== 'PARENT') return <Navigate to="/tableau-de-bord" replace />
   return <Outlet />
 }

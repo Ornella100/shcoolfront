@@ -14,7 +14,7 @@ export default function SuperuserRoute() {
   }
 
   if (!user?.is_superuser) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/tableau-de-bord" replace />
   }
 
   return <Outlet />

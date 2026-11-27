@@ -36,7 +36,12 @@ export default function LoginPage() {
   })
 
   if (!isLoading && user) {
-    return <Navigate to={user.account_type === 'PARENT' ? '/portail-parent' : '/'} replace />
+    const destination = user.is_superuser
+      ? '/admin/ecoles'
+      : user.account_type === 'PARENT'
+        ? '/portail-parent'
+        : '/tableau-de-bord'
+    return <Navigate to={destination} replace />
   }
 
   async function onSubmit(values) {
