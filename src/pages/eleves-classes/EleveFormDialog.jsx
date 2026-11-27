@@ -119,7 +119,7 @@ export default function EleveFormDialog({ open, onOpenChange, eleve, defaultClas
             onSubmit={form.handleSubmit((values) => mutation.mutate(values))}
             className="space-y-4"
           >
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField
                 control={form.control}
                 name="first_name"
@@ -177,7 +177,7 @@ export default function EleveFormDialog({ open, onOpenChange, eleve, defaultClas
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField
                 control={form.control}
                 name="sexe"
@@ -235,7 +235,7 @@ export default function EleveFormDialog({ open, onOpenChange, eleve, defaultClas
             {customFields.length > 0 && (
               <div className="space-y-3 rounded-md border border-border p-3">
                 <p className="text-sm font-medium">Champs personnalisés</p>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {customFields.map((f) => (
                     <div key={f.slug} className="space-y-1.5">
                       <label className="text-sm font-medium">{f.name}</label>

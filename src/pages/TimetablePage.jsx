@@ -156,7 +156,7 @@ export default function TimetablePage() {
                   </SelectContent>
                 </Select>
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Début</label>
                   <Input type="time" value={form.start_time} onChange={(event) => updateForm('start_time', event.target.value)} />

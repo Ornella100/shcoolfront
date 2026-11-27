@@ -114,7 +114,7 @@ export default function AddChildDialog({ open, onOpenChange, parent }) {
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4 items-end">
+            <div className="grid grid-cols-1 items-end gap-4 sm:grid-cols-2">
               <FormField
                 control={form.control}
                 name="relationship"

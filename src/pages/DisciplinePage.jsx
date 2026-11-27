@@ -300,7 +300,7 @@ export default function DisciplinePage() {
                       }))}
                       placeholder="Compte rendu du suivi ou de la résolution"
                       maxLength={2000}
-                      className="min-w-64 flex-1"
+                      className="min-w-0 flex-1"
                     />
                     <Button
                       variant="outline"

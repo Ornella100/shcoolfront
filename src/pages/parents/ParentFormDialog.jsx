@@ -137,7 +137,7 @@ export default function ParentFormDialog({ open, onOpenChange, parent }) {
             onSubmit={form.handleSubmit((values) => mutation.mutate(values))}
             className="space-y-4"
           >
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField
                 control={form.control}
                 name="first_name"
@@ -166,7 +166,7 @@ export default function ParentFormDialog({ open, onOpenChange, parent }) {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField
                 control={form.control}
                 name="phone_number"
@@ -204,7 +204,7 @@ export default function ParentFormDialog({ open, onOpenChange, parent }) {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField
                 control={form.control}
                 name="whatsapp_number"
@@ -251,7 +251,7 @@ export default function ParentFormDialog({ open, onOpenChange, parent }) {
                   )}
                 />
 
-                <div className="grid grid-cols-2 gap-4 items-end">
+                <div className="grid grid-cols-1 items-end gap-4 sm:grid-cols-2">
                   <FormField
                     control={form.control}
                     name="relationship"

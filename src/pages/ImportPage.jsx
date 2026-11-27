@@ -419,7 +419,7 @@ export default function ImportPage() {
                       }
                     }}
                   >
-                    <SelectTrigger className="w-64 shrink-0">
+                    <SelectTrigger className="w-full sm:w-64">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>

@@ -67,7 +67,7 @@ export default function MessagePreview({ preview, payload, classes }) {
         </div>
       )}
 
-      <dl className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+      <dl className="grid grid-cols-1 gap-x-4 gap-y-1 text-sm sm:grid-cols-2">
         <dt className="text-muted-foreground">Destinataires</dt>
         <dd>
           {scopeLabel}
@@ -85,7 +85,7 @@ export default function MessagePreview({ preview, payload, classes }) {
         </dd>
       </dl>
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
         <Stat label="Élèves concernés" value={preview.eleves_count} />
         <Stat
           label="Messages envoyés"

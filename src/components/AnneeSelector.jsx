@@ -23,7 +23,7 @@ export default function AnneeSelector() {
     <div className="flex items-center gap-2">
       <CalendarDays className="size-4 text-muted-foreground" />
       <Select value={anneeId ? String(anneeId) : ''} onValueChange={(v) => changerAnnee(Number(v))}>
-        <SelectTrigger className="w-[190px]" aria-label="Année scolaire">
+        <SelectTrigger className="w-40 sm:w-[190px]" aria-label="Année scolaire">
           <SelectValue placeholder="Année scolaire" />
         </SelectTrigger>
         <SelectContent>
