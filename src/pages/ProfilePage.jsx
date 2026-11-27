@@ -22,6 +22,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { api, getApiErrorMessage } from '@/lib/api'
 import { updateProfile } from '@/lib/accounts-api'
@@ -145,11 +146,11 @@ export default function ProfilePage() {
           <CardContent className="space-y-4">
             {whatsappQuery.data?.connected && <p className="text-sm text-emerald-700">Compte connecté · ID : {whatsappQuery.data.phone_number_id}</p>}
             <div className="space-y-2">
-              <FormLabel htmlFor="whatsapp-phone-id">Phone Number ID Meta</FormLabel>
+              <Label htmlFor="whatsapp-phone-id">Phone Number ID Meta</Label>
               <Input id="whatsapp-phone-id" value={whatsappPhoneId} onChange={(event) => setWhatsappPhoneId(event.target.value)} placeholder="Identifiant du numéro dans Meta" />
             </div>
             <div className="space-y-2">
-              <FormLabel htmlFor="whatsapp-token">Jeton d’accès Meta {whatsappQuery.data?.has_token ? '(laisser vide pour conserver le jeton actuel)' : ''}</FormLabel>
+              <Label htmlFor="whatsapp-token">Jeton d’accès Meta {whatsappQuery.data?.has_token ? '(laisser vide pour conserver le jeton actuel)' : ''}</Label>
               <Input id="whatsapp-token" type="password" autoComplete="new-password" value={whatsappToken} onChange={(event) => setWhatsappToken(event.target.value)} placeholder="Coller le jeton d’accès de cette école" />
             </div>
             <Button onClick={() => whatsappMutation.mutate()} disabled={whatsappMutation.isPending || !whatsappPhoneId.trim() || (!whatsappToken.trim() && !whatsappQuery.data?.has_token)}>
